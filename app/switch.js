@@ -242,7 +242,7 @@ $(function() {
 
 async function init(){
   switchem.on("capture", () => {
-    html2canvas(document.getElementById("main"), {
+    html2canvas(document.getElementById("switchcontainer"), {
         width: 1280,
         height: 720
     }).then(canvas => {
