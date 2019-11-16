@@ -251,7 +251,7 @@ async function init(){
       let img = $("canvas").get(0).toDataURL();
       let data = img.replace(/^data:image\/\w+;base64,/, "");
       let buf = Buffer.from(data, 'base64');
-      fs.writeFileSync(path.join(__dirname, "screenshot.png"), buf, (err) => {if(err) throw err});
+      fs.writeFileSync(screenshot, buf, (err) => {if(err) throw err});
       document.body.removeChild(canvas);
     });
   });
