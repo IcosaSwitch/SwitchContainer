@@ -1,6 +1,6 @@
 # SwitchContainer
 
-This Repo with a SwitchContainer for your electron app (for html emulation or other thing)
+This Repo is a SwitchContainer for your electron app (for html emulation or other thing)
 
 <img src="https://i.imgur.com/CQVxblh.png"/>
 
