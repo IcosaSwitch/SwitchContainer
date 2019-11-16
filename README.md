@@ -22,8 +22,8 @@ This app work with Emitteur called `switchem`
 | `power` | `P` | Power | Make screen off/on |
 | `volp` | `none` | Volume Up/Plus | |
 | `volm` | `none` | Volume Down/Minus | |
-| `minus` | `none` | - | |
-| `plus` | `none` | + | |
+| `minus` | `none` | <b>-</b> | |
+| `plus` | `none` | <b>+<b> | |
 | `ltopstart` | `none` | Left Joystick Up | |
 | `ltopstop` | `none` | Left Joystick Up | |
 | `ltopleftstart` | `none` | Left Joystick Up Left | |
