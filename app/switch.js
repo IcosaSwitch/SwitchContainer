@@ -455,7 +455,6 @@ let istopower = false;
 let ispowerpressed = false;
 async function power(){
   switchem.emit('power');
-  let main = document.getElementById("switchcontainer");
   ispowerpressed = true;
   if(ispower){
     unpower();
@@ -465,45 +464,53 @@ async function power(){
   function unpower(){
     if(istounpower) return;
     ispowerpressed = false;
-    document.getElementById("switchcontainer").setAttribute("style", "opacity: 0.875;");
     istounpower = true
-    $('#main').find('input, textarea, button, select').prop('disabled', true);
-    setTimeout(() => {document.getElementById("switchcontainer").setAttribute("style", "opacity: 0.75;")}, 25);
-    setTimeout(() => {document.getElementById("switchcontainer").setAttribute("style", "opacity: 0.625;")}, 50);
-    setTimeout(() => {document.getElementById("switchcontainer").setAttribute("style", "opacity: 0.50;")}, 75);
-    setTimeout(() => {document.getElementById("switchcontainer").setAttribute("style", "opacity: 0.375;")}, 100);
-    setTimeout(() => {document.getElementById("switchcontainer").setAttribute("style", "opacity: 0.25;")}, 125);
-    setTimeout(() => {document.getElementById("switchcontainer").setAttribute("style", "opacity: 0.125;")}, 150);
-    setTimeout(() => {
-      document.getElementById("switchcontainer").setAttribute("style", "opacity: 0;");
+    $('#switchcontainer').find('input, textarea, button, select').prop('disabled', true);
+    $("#switchcontainer").fadeTo(300, 0, function(){
       istounpower = false;
       ispower = false;
       if(ispowerpressed){
         onpower();
         ispowerpressed = false;
       }
-    }, 175);
+    });
   }
   function onpower(){
     if(istopower) return;
     ispowerpressed = false;
-    document.getElementById("switchcontainer").setAttribute("style", "opacity: 0.125;");
     istopower = true
-    setTimeout(() => {document.getElementById("switchcontainer").setAttribute("style", "opacity: 0.25;")}, 25);
-    setTimeout(() => {document.getElementById("switchcontainer").setAttribute("style", "opacity: 0.375;")}, 50);
-    setTimeout(() => {document.getElementById("switchcontainer").setAttribute("style", "opacity: 0.50;")}, 75);
-    setTimeout(() => {document.getElementById("switchcontainer").setAttribute("style", "opacity: 0.625;")}, 100);
-    setTimeout(() => {document.getElementById("switchcontainer").setAttribute("style", "opacity: 0.75;")}, 125);
-    setTimeout(() => {document.getElementById("switchcontainer").setAttribute("style", "opacity: 0.875;")}, 150);
-    setTimeout(() => {
-      document.getElementById("switchcontainer").setAttribute("style", "opacity: 1;");
+    $("#switchcontainer").fadeTo(300, 1, function(){
       istopower = false;
       ispower = true;
-      $('#main').find('input, textarea, button, select').prop("disabled", false);
+      $('#switchcontainer').find('input, textarea, button, select').prop("disabled", false);
       if(ispowerpressed){
         unpower();
         ispowerpressed = false;
       }
-    }, 175);
+    });
   }
+}
+async function ShowNotification(text, ms = 5000){
+  if(document.getElementById("notification") !== null){
+    await new Promise(function(resolve, reject) {
+      let interval = null;
+      interval = setInterval(() => {
+        if(document.getElementById("notification") == null){
+          stop();
+        }
+      });
+      function stop(){
+        clearInterval(interval);
+        resolve();
+      }
+    });
+  }
+  $("#switchcontainer").append(`<input type="button" class="bubble" value="${text}" id="notification" style="opacity: 0;"/>`);
+  $("#notification").fadeTo(350, 0.85, function(){
+    setTimeout(() => {
+      $("#notification").fadeTo(350, 0, function(){
+        setTimeout(() => {$("#notification").remove();}, 150);
+      });
+    }, ms);
+  });
 }
