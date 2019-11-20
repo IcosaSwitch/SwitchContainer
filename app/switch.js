@@ -490,27 +490,3 @@ async function power(){
     });
   }
 }
-async function ShowNotification(text, ms = 5000){
-  if(document.getElementById("notification") !== null){
-    await new Promise(function(resolve, reject) {
-      let interval = null;
-      interval = setInterval(() => {
-        if(document.getElementById("notification") == null){
-          stop();
-        }
-      });
-      function stop(){
-        clearInterval(interval);
-        resolve();
-      }
-    });
-  }
-  $("#switchcontainer").append(`<input type="button" class="bubble" value="${text}" id="notification" style="opacity: 0;"/>`);
-  $("#notification").fadeTo(350, 0.85, function(){
-    setTimeout(() => {
-      $("#notification").fadeTo(350, 0, function(){
-        setTimeout(() => {$("#notification").remove();}, 150);
-      });
-    }, ms);
-  });
-}
